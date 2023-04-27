@@ -56,7 +56,7 @@ func variableNotSetOrIsNil(env string) bool {
 // https://docs.stackup.sh/docs/packages/bundler/configure for details.
 func GetValues() *Values {
 	// Default variables
-	viper.SetDefault("erc4337_bundler_port", 4337)
+	viper.SetDefault("erc4337_bundler_port", 3000)
 	viper.SetDefault("erc4337_bundler_data_directory", "/tmp/stackup_bundler")
 	viper.SetDefault("erc4337_bundler_supported_entry_points", "0x0576a174D229E3cFA37253523E645A78A0C91B57")
 	viper.SetDefault("erc4337_bundler_max_verification_gas", 1500000)

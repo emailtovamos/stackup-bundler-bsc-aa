@@ -3,7 +3,7 @@
 package relay
 
 import (
-	"fmt"
+	// "fmt"
 	"math/big"
 	"net/http"
 	"time"
@@ -91,7 +91,7 @@ func (r *Relayer) FilterByClientID() gin.HandlerFunc {
 		l := r.logger.WithName("filter_by_client")
 
 		isBanned := false
-		var os, oi int
+		// var os, oi int
 		cid := ginutils.GetClientIPFromXFF(c)
 		err := r.db.View(func(txn *badger.Txn) error {
 			opsSeen, opsIncluded, err := getOpsCountByClientID(txn, cid)
@@ -109,8 +109,8 @@ func (r *Relayer) FilterByClientID() gin.HandlerFunc {
 			}
 
 			isBanned = true
-			os = opsSeen
-			oi = opsIncluded
+			// os = opsSeen
+			// oi = opsIncluded
 			return nil
 		})
 		if err != nil {
@@ -120,21 +120,21 @@ func (r *Relayer) FilterByClientID() gin.HandlerFunc {
 		}
 
 		if isBanned {
-			l.Info("client banned")
-			c.Status(http.StatusForbidden)
-			c.JSON(
-				http.StatusForbidden,
-				gin.H{
-					"error": fmt.Sprintf(
-						"opsSeen (%d) exceeds opsIncluded (%d) by allowed threshold (%d). Wait %s to retry.",
-						os,
-						oi,
-						r.bannedThreshold,
-						r.bannedTimeWindow,
-					),
-				},
-			)
-			c.Abort()
+			// l.Info("client banned")
+			// c.Status(http.StatusForbidden)
+			// c.JSON(
+			// 	http.StatusForbidden,
+			// 	gin.H{
+			// 		"error": fmt.Sprintf(
+			// 			"opsSeen (%d) exceeds opsIncluded (%d) by allowed threshold (%d). Wait %s to retry.",
+			// 			os,
+			// 			oi,
+			// 			r.bannedThreshold,
+			// 			r.bannedTimeWindow,
+			// 		),
+			// 	},
+			// )
+			// c.Abort()
 		} else {
 			l.Info("client ok")
 		}

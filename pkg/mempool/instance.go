@@ -27,10 +27,10 @@ type Mempool struct {
 func New(db *badger.DB) (*Mempool, error) {
 	queue := newUserOpQueue()
 	watches := []watch{}
-	err := loadFromDisk(db, queue)
-	if err != nil {
-		return nil, err
-	}
+	// err := loadFromDisk(db, queue)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
 	return &Mempool{db, queue, watches}, nil
 }
